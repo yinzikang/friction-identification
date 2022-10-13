@@ -9,6 +9,14 @@
 - 求均值：取每一个正/逆方向上中间90%的数据，消除两端的上升下降
 - 对每个关节同方向上速度进行拟合，得到函数与参数
 
-# 说明
+# 文件
+- friction_para_identification
+未封装的代码
+- friction_para_identification_dir
+路径下所有文件进行处理
+- friction_para_identification_file
+单个文件进行处理
+
+# 其他
 - 同关节正逆转差距挺大
 - 拟合的参数选择将影响参数结果

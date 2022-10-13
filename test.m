@@ -1,13 +1,11 @@
 data_dir = './data/';
-speed_num_list = [22,21,18,21,14,20];
-[result, point_set, para_set] = friction_para_identification(data_dir,speed_num_list);
-% 愚蠢的toolbox只能识别一维数组
-% joint_idx = 6;
-% Y_data_t = point_set{joint_idx}(:,1);
-% X_data_v = point_set{joint_idx}(:,2);
-% Y_data_t_p = Y_data_t(Y_data_t>0);
-% X_data_v_p = X_data_v(X_data_v>0);
-% scatter(Y_data_t_p,X_data_v_p)
+joint_idx_list = [6, 5, 4, 3, 2, 1];
+speed_num_list = [22, 21, 18, 21, 14, 20];
+[result, point_set] = friction_para_identification_dir(data_dir, joint_idx_list, speed_num_list);
 
-% (a + (b - a) .* exp(-(x./d) .* (x./d))) .* sign(x) + e .* x
-% 
+
+% file_name = './data/data-2022-10-08-14_35_38.txt';
+% joint_idx = 6;
+% real_speed_num = 22;
+% [result, point_set] = friction_para_identification_file(file_name, joint_idx, real_speed_num);
+
