@@ -3,7 +3,7 @@ load("Joint_raw.mat")
 [row_num, col_num] = size(Joint_raw);
 save_flag = 1;
 close_flag = 1;
-gravity_flag = 1;
+gravity_flag = 0; % 0则重力也被计算，1则减掉了重力矩
 
 % 全文件处理，自动参数调节，效果一般
 % for i = 1:row_num
@@ -19,7 +19,7 @@ gravity_flag = 1;
 % end
 
 % 单个文件处理，用于手动参数调节
-% num = 3;
+% num = 1;
 % for i = num:num
 %     % 取cell的第x列不能用cell{:,x}，需要按照下面的写法来取
 %     data = Joint_raw(i, 1:end);

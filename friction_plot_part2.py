@@ -28,9 +28,9 @@ def Stribeck(para_list, v_array):
     return t_array.reshape(-1)
 
 
-mean_file = scio.loadmat('./joint_t_v_mean.mat')  # 已经经过单位变换后的力矩与速度
+mean_file = scio.loadmat('./joint_t_v_mean_with_g.mat')  # 已经经过单位变换后的力矩与速度
 data_mean = mean_file['joint_t_v_mean']
-para_file = df = pd.read_excel('results.xls', 'Sheet1', header=None)
+para_file = df = pd.read_excel('results_with_g.xls', 'Sheet1', header=None)
 para = np.array(para_file)
 
 dot_color_list = ['#CD5C5C', '#00FF00', '#4169E1']
