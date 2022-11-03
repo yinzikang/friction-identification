@@ -10,6 +10,11 @@
 - 对每个关节同方向上速度进行拟合，得到函数与参数
 
 # 文件
+- joint_raw
+六行对应六个关节
+六列对应关节号+时间+关节力矩+关节速度+关节位置+关节重力矩+空间位姿
+- joint_t_v_mean
+六个元包，每一个对应一个关节得到的六组力矩-速度均值
 - friction_para_identification
 未封装的代码
 - friction_para_identification_dir

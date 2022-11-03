@@ -4,6 +4,8 @@ load("Joint_raw.mat")
 save_flag = 1;
 close_flag = 1;
 gravity_flag = 1;
+
+% 全文件处理，自动参数调节，效果一般
 % for i = 1:row_num
 %     % 取cell的第x列不能用cell{:,x}，需要按照下面的写法来取
 %     data = Joint_raw(i, 1:end);
@@ -16,28 +18,39 @@ gravity_flag = 1;
 %     clear split_idx  joint_t_v_mean para_and_func;
 % end
 
-num = 3;
-for i = num:num
+% 单个文件处理，用于手动参数调节
+% num = 3;
+% for i = num:num
+%     % 取cell的第x列不能用cell{:,x}，需要按照下面的写法来取
+%     data = Joint_raw(i, 1:end);
+%     jnt_num = data{1,1};
+%     split_idx = sequence_split(data, jnt_num, save_flag, close_flag, gravity_flag);
+%     disp(length(split_idx));
+%     joint_t_v_mean = tor_vel_mean_cal(data, split_idx, jnt_num, gravity_flag);
+%     disp(joint_t_v_mean(:,2)')
+% %     para_and_func = fric_curve_fitting(joint_t_v_mean, jnt_num, save_flag, close_flag, gravity_flag);
+% %     clear split_idx  joint_t_v_mean para_and_func;
+%     torque = joint_t_v_mean(:,1);
+%     vel = joint_t_v_mean(:,2);
+%     pos_idx = find(vel>0);
+%     neg_idx = find(vel<0);
+%     vp = vel(pos_idx(1:end));
+%     vn = vel(neg_idx(1:end));
+%     tp = torque(pos_idx);
+%     tn = torque(neg_idx);
+% end
+
+% 全文件分割与均值保存
+joint_t_v_mean = cell(1,6);
+for i = 1:row_num
     % 取cell的第x列不能用cell{:,x}，需要按照下面的写法来取
     data = Joint_raw(i, 1:end);
     jnt_num = data{1,1};
     split_idx = sequence_split(data, jnt_num, save_flag, close_flag, gravity_flag);
     disp(length(split_idx));
-    joint_t_v_mean = tor_vel_mean_cal(data, split_idx, jnt_num, gravity_flag);
-    disp(joint_t_v_mean(:,2)')
-%     para_and_func = fric_curve_fitting(joint_t_v_mean, jnt_num, save_flag, close_flag, gravity_flag);
-%     clear split_idx  joint_t_v_mean para_and_func;
-    torque = joint_t_v_mean(:,1);
-    vel = joint_t_v_mean(:,2);
-    pos_idx = find(vel>0);
-    neg_idx = find(vel<0);
-    vp = vel(pos_idx(1:end));
-    vn = vel(neg_idx(1:end));
-    tp = torque(pos_idx);
-    tn = torque(neg_idx);
-end
-
-
+    joint_t_v_mean{1,i} = tor_vel_mean_cal(data, split_idx, jnt_num, gravity_flag);
+%     disp(joint_t_v_mean(:,2)')
+end    
 
 %% 加载文件，分割点位并返回
 function split_idx_list = sequence_split(current_file, joint_idx, save_flag, close_flag, gravity_flag)
